@@ -14,6 +14,7 @@ import {
   TouchableHighlight,
   ImageBackground,
   Alert,
+  
 } from 'react-native';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
@@ -114,6 +115,9 @@ export default class Login extends Component {
                   size={GoogleSigninButton.Size.Icon}
                   color={GoogleSigninButton.Color.Dark}
                   onPress={this.GoogleSignIn}/>
+                  {renderIf(this.state.loginInProgress,
+                    <Text>Loggin ...</Text>
+                  )}
             </View>  
           </ImageBackground>
        
