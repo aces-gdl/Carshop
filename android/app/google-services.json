@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "674158416989",
+    "firebase_url": "https://carshopmanager.firebaseio.com",
+    "project_id": "carshopmanager",
+    "storage_bucket": "carshopmanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674158416989:android:de52333066538f79",
+        "android_client_info": {
+          "package_name": "com.carshopmanager.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674158416989-4pobv5s99jvi2qtgvr8us172372g62rj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carshopmanager.android",
+            "certificate_hash": "e0f84f68c91b1693ee37e62c52f4855f6c800080"
+          }
+        },
+        {
+          "client_id": "674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbCBQ-GfCjQvj5BaIP24kPbPZ_cIvgi0A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "674158416989-qmdgdniob8k285idvrlchsp2bqujgk5b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.carshopmanager.ios"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
