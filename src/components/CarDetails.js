@@ -52,12 +52,9 @@ export default class CarDetails extends Component {
       isUpdate:false,
       user:user,
     }
-    this.getImage = this.getImage.bind(this);
-    
-    
   }
 
-   
+ /* Leave it as reference */  
   getImage (image) {
     let imageRef = storageRef.ref(image);
     imageRef.getDownloadURL()
@@ -92,9 +89,7 @@ export default class CarDetails extends Component {
             ImageURL: Auto.ImageURL,
             isUpdate: true,
           });
-          console.log(Auto.Alias);
-          this.getImage('autos/'+AutoID + '.jpg');
-          
+          console.log(Auto.Alias);          
       }); 
     } 
   }

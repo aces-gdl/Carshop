@@ -36,7 +36,6 @@ export default class CarListing extends Component {
       ds: ds,
     };
     this.renderRow = this.renderRow.bind(this);
-    this.getImage = this.getImage.bind(this);
   }
 
 
@@ -53,19 +52,6 @@ export default class CarListing extends Component {
 
   }
 
-    getImage (image) {
-    let imageRef = storageRef.ref(image);
-    let imageURL = '';
-     imageRef.getDownloadURL()
-    .then((url) => {
-       imageURL = url;
-       console.log('Image URL:'+ url);
-       return imageURL;
-      })
-    .catch ((error)=>{
-      console.log('Error in getIamge: ' + error)
-    });
-  }
 
   renderRow(rowData){
     console.log('Image per Row ' +rowData.Auto.ImageURL);
