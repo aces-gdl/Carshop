@@ -115,7 +115,7 @@ export default class Login extends Component {
                   size={GoogleSigninButton.Size.Icon}
                   color={GoogleSigninButton.Color.Dark}
                   onPress={this.GoogleSignIn}/>
-                  {renderIf(this.state.loginInProgress,
+                  {RenderIf(this.state.loginInProgress,
                     <Text>Loggin ...</Text>
                   )}
             </View>  

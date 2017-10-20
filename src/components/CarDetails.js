@@ -89,6 +89,7 @@ export default class CarDetails extends Component {
             Year:   Auto.Year,
             Color:  Auto.Color,
             Mileage: Auto.Mileage,
+            ImageURL: Auto.ImageURL,
             isUpdate: true,
           });
           console.log(Auto.Alias);
@@ -109,6 +110,7 @@ export default class CarDetails extends Component {
       Color:    this.state.Color,
       Mileage:  this.state.Mileage,
       useruid:  this.state.user.uid,
+      ImageURL: this.state.ImageURL,
     }
 
     FirebaseRef.database().ref('/Autos/' + this.props.navigation.state.params.AutoID).set(miRegistro)
@@ -134,6 +136,7 @@ export default class CarDetails extends Component {
       Color:    this.state.Color,
       Mileage:  this.state.Mileage,
       useruid:  this.state.user.uid,
+      ImageURL: this.state.ImageURL,
     }
 
     var updates = {};
@@ -188,6 +191,9 @@ export default class CarDetails extends Component {
           UploadImage(this.state.imagePath, 'autos', this.props.navigation.state.params.AutoID +`.jpg`)
           .then ((responseData)=>{
             console.log('imagen Arriba', responseData)
+            this.setState({
+                ImageURL: responseData.downloadURL,
+            })
           })
           .done()
         }

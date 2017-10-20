@@ -11,13 +11,13 @@ import {
   Alert,
 } from 'react-native';
 
-
+import {CachedImage}  from 'react-native-img-cache';
 import {FirebaseRef} from './../../firebase/Firebase';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const  styles = require ('./../../css/global');
-
+const storageRef = FirebaseRef.storage();
 
 
 export default class CarListing extends Component {
@@ -36,6 +36,7 @@ export default class CarListing extends Component {
       ds: ds,
     };
     this.renderRow = this.renderRow.bind(this);
+    this.getImage = this.getImage.bind(this);
   }
 
 
@@ -44,6 +45,7 @@ export default class CarListing extends Component {
     this.AutosRef.on ('child_added', (dataSnapshot) => {
      this.Autos.push({id:dataSnapshot.key, Auto: dataSnapshot.val()})
      this.setState({
+
        ds: this.state.ds.cloneWithRows(this.Autos),
      });
      this.AutosRef.off();
@@ -51,14 +53,40 @@ export default class CarListing extends Component {
 
   }
 
+    getImage (image) {
+    let imageRef = storageRef.ref(image);
+    let imageURL = '';
+     imageRef.getDownloadURL()
+    .then((url) => {
+       imageURL = url;
+       console.log('Image URL:'+ url);
+       return imageURL;
+      })
+    .catch ((error)=>{
+      console.log('Error in getIamge: ' + error)
+    });
+  }
+
   renderRow(rowData){
+    console.log('Image per Row ' +rowData.Auto.ImageURL);
     return(
 
 
         <View style={styles.inputContainer}>
           <View style={{flexDirection:'column'}}>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <View style={{flexDirection:'row'}}>
+              {rowData.Auto.ImageURL ? 
+                        <CachedImage source={{uri:rowData.Auto.ImageURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50}} mutable/> 
+                        :
+                        <Icon style={{marginLeft:4, padding:10, fontSize:120}} 
+                                name="ios-car" 
+                                size={120} 
+                                color='black' />
+                  }
+              </View>
               <View style={{flexDirection:'column'}}>
+
                 <Text>{rowData.Auto.Alias}</Text>
                 <Text>{rowData.Auto.Maker}</Text>
               </View>
