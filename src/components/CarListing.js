@@ -58,23 +58,23 @@ export default class CarListing extends Component {
     return(
 
 
-        <View style={styles.inputContainer}>
+        <View style={styles.listContainer}>
           <View style={{flexDirection:'column'}}>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <View style={{flexDirection:'row'}}>
+              <View style={{flexDirection:'row', alignContent:'flex-start'}}>
               {rowData.Auto.ImageURL ? 
-                        <CachedImage source={{uri:rowData.Auto.ImageURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50}} mutable/> 
+                        <CachedImage source={{uri:rowData.Auto.ImageURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50,marginRight:4, padding:10}} mutable/> 
                         :
-                        <Icon style={{marginLeft:4, padding:10, fontSize:120}} 
+                        <Icon style={{marginRight:4, padding:10, fontSize:40}} 
                                 name="ios-car" 
-                                size={120} 
+                                size={40} 
                                 color='black' />
                   }
-              </View>
-              <View style={{flexDirection:'column'}}>
+                  <View style={{flexDirection:'column'}}>
 
-                <Text>{rowData.Auto.Alias}</Text>
-                <Text>{rowData.Auto.Maker}</Text>
+                    <Text>{rowData.Auto.Alias}</Text>
+                    <Text>{rowData.Auto.Maker}</Text>
+                  </View>
               </View>
               <TouchableHighlight onPress={()=> this.props.navigation.navigate('CarDetails',{AutoID:rowData.id})}>
                 <Icon style={{marginLeft:4, padding:10, fontSize:20}} 

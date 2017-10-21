@@ -22,6 +22,8 @@ import {FirebaseRef} from './../../firebase/Firebase';
 import * as firebase from 'firebase';
 import RenderIf from './../utils/RenderIf';
 
+const  styles = require ('./../../css/global');
+
 export default class Login extends Component {
 
   constructor(props){
@@ -41,7 +43,8 @@ export default class Login extends Component {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
-         webClientId: '674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com',
+        webClientId: '674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com',
+        // webClientId: '674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com',
         offlineAccess: false
       });
 
@@ -127,7 +130,7 @@ export default class Login extends Component {
   }
 }
 
-
+/*
 
 const styles = StyleSheet.create({
   container: {
@@ -196,3 +199,4 @@ const styles = StyleSheet.create({
 });
 
 
+*/

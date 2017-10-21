@@ -17,6 +17,7 @@ import {GoogleSignin} from 'react-native-google-signin';
 import {CachedImage}  from 'react-native-img-cache';
 import renderIf       from './../../src/utils/RenderIf';
 
+const  styles = require ('./../../css/global');
 
 export default class MainScreen extends Component {
 
@@ -116,7 +117,7 @@ export default class MainScreen extends Component {
 MainScreen.navigationOptions = {
   title: "Menú Principal"
 };
-
+/*
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -164,4 +165,4 @@ const styles = StyleSheet.create({
     alignSelf:'center', 
     fontSize:30}
 
-});
+});*/

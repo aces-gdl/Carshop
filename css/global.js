@@ -36,6 +36,16 @@ module.exports = StyleSheet.create({
       borderColor:'#fff',
       backgroundColor: 'rgba(255,255,255,0.2)',
     },
+    listContainer:{
+      margin:10,
+      marginBottom:0,
+      padding:10,
+      paddingBottom: 0,
+      borderWidth:1,
+      alignSelf:'stretch',
+      borderColor:'#fff',
+      backgroundColor: 'rgba(255,255,255,0.2)',
+    },
     input:{
       fontSize: 16,
       height: 40,
@@ -56,8 +66,8 @@ module.exports = StyleSheet.create({
     },
     buttonContainer:{
       alignSelf:'stretch',
-      margin: 5,
-      padding: 5,
+      margin: 20,
+      padding: 20,
       borderWidth:1,
       borderColor:'#fff',
       backgroundColor:'rgba(255,255,255,0.6)'
@@ -72,8 +82,20 @@ module.exports = StyleSheet.create({
     },
     buttonText:{
       color:'black',
-      fontSize:20,
+      fontSize:16,
       fontWeight:'bold',
       textAlign:'center',
+    },
+    icon:{
+      marginLeft:4, 
+      padding:5,
+      alignSelf:'center', 
+      fontSize:30
+    },
+    buttonContent:{
+      flexDirection:'row', 
+      justifyContent:'space-between', 
+      padding:1, 
+      alignContent:'center'
     },
 });

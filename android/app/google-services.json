@@ -15,12 +15,24 @@
       },
       "oauth_client": [
         {
-          "client_id": "674158416989-4pobv5s99jvi2qtgvr8us172372g62rj.apps.googleusercontent.com",
+          "client_id": "674158416989-rhvvssoiu7uaa842v9vhgpaaqq6s987m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carshopmanager.android",
+            "certificate_hash": "0b54eccb76b3acd23b44ea841420a449c0746cc5"
+          }
+        },
+        {
+          "client_id": "674158416989-v8fpet3er0cskc3j7a487kv6hjo6gdnq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.carshopmanager.android",
             "certificate_hash": "e0f84f68c91b1693ee37e62c52f4855f6c800080"
           }
+        },
+        {
+          "client_id": "674158416989-9a4m25isnfhphn6984q3hm01n8pqarnq.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com",
@@ -40,11 +52,11 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "674158416989-o4mu45k5rumpf16ugbbpt74u04andr96.apps.googleusercontent.com",
+              "client_id": "674158416989-9a4m25isnfhphn6984q3hm01n8pqarnq.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "674158416989-qmdgdniob8k285idvrlchsp2bqujgk5b.apps.googleusercontent.com",
+              "client_id": "674158416989-agmtnkdgb3qa7padm4k3icbeoerugd40.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.carshopmanager.ios"
