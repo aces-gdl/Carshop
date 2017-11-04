@@ -24,6 +24,8 @@ import renderIf       from './../../src/utils/RenderIf';
 import ImagePicker    from 'react-native-image-picker';
 import RNFetchBlob    from 'react-native-fetch-blob';
 import UploadImage    from './../../src/utils/UploadImage';
+import RepairEventListing  from './RepairEventListing';
+
 
 const  styles = require ('./../../css/global');
 const storageRef = FirebaseRef.storage();
@@ -341,6 +343,16 @@ export default class CarDetails extends Component {
           </View>
           </View>
           </View>
+          <RepairEventListing AutoID={this.props.navigation.state.params.AutoID}>
+
+          </RepairEventListing>
+          <TouchableHighlight onPress={()=> this.props.navigation.navigate('RepairEvent',{AutoID:'new_Auto'})}>
+                    <Icon style={{marginLeft:4, padding:10, fontSize:20}} 
+                          name="ios-add-circle-outline" 
+                          size={20} 
+                          color='black' />
+              </TouchableHighlight>
+
         </ScrollView>
       </ImageBackground>
     );

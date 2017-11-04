@@ -19,6 +19,8 @@ import CarCenterDetails     from './src/components/CarCenterDetails';
 import CarListing           from './src/components/CarListing';
 import CarDetails           from './src/components/CarDetails';
 import TomaFoto             from './src/utils/TomaFoto';
+import RepairEvent          from './src/components/RepairEvent';
+import RepairEventListing   from './src/components/RepairEventListing';
 import Settings             from './src/components/Settings';
 
 
@@ -30,6 +32,9 @@ const carshop2 = StackNavigator({
   CarListing:         { screen: CarListing,           title: 'Listado de Autos'} ,
   CarDetails:         { screen: CarDetails,           title: 'Detalles del Auto'} ,
   TomaFoto:           { screen: TomaFoto,             title: 'TomaFoto'},
+  RepairEvent:        { screen: RepairEvent,          tittle:'RepairEvent'},
+  RepairEventListing: { screen: RepairEventListing,   tittle:'RepairEventListing'},
+  
   Settings:           { screen: Settings,             title: 'Ajustes'}
 });
 
