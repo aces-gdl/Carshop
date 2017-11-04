@@ -24,8 +24,6 @@ import renderIf       from './../../src/utils/RenderIf';
 import ImagePicker    from 'react-native-image-picker';
 import RNFetchBlob    from 'react-native-fetch-blob';
 import UploadImage    from './../../src/utils/UploadImage';
-import RepairEventListing  from './RepairEventListing';
-
 
 const  styles = require ('./../../css/global');
 const storageRef = FirebaseRef.storage();
@@ -35,24 +33,23 @@ const storageRef = FirebaseRef.storage();
 
 
 
-export default class CarDetails extends Component {
+export default class RepairEvent extends Component {
 
   constructor(props){
     super(props);
 
     let user = FirebaseRef.auth().currentUser;
-    
+    let AutoID = 
     this.state = {
-      Alias:'',
-      Maker:'',
-      Model:'',
-      Year:'',
-      Color:'',
-      Mileage:'',
-      ImagePath:'',
-      ImageURL:'',
-      isUpdate:false,
-      user:user,
+        Mileage:        '' ,
+        Description:    '',
+        ServiceDate:    '',
+        TotalAmount:    '',
+        GuarantyDays:   '',
+        GuarantyKM:     '',
+        Autouid:        '',
+        isUpdate:false,
+        user:user,
     }
   }
 
@@ -75,23 +72,22 @@ export default class CarDetails extends Component {
     let Auto = '';
     
 
-    if (this.props.navigation.state.params.AutoID != 'new_Auto'){
+    if (this.props.navigation.state.params.RepairEvent != 'new_RepairEvent'){
+      let RepairEventID = this.props.navigation.state.params.RepairEvent;
       let AutoID = this.props.navigation.state.params.AutoID;
-      return FirebaseRef.database().ref('/Autos/' + AutoID).once('value')
+      return FirebaseRef.database().ref('/RepairEvents/' + RepairEventID).once('value')
       .then((snapshot) =>{
-          Auto = snapshot.val();
+          Service = snapshot.val();
           this.setState({
-            Auto:   Auto,
-            Alias:  Auto.Alias,
-            Maker:  Auto.Maker,
-            Model:  Auto.Model,
-            Year:   Auto.Year,
-            Color:  Auto.Color,
-            Mileage: Auto.Mileage,
-            ImageURL: Auto.ImageURL,
-            isUpdate: true,
+            Mileage:        Servicio.Mileage,
+            Description:    Servicio.Description,
+            ServiceDate:    Service.ServiceDate,
+            TotalAmount:    Service.TotalAmount,
+            GuarantyDays:   Service.GuarantyDays,
+            GuarantyKM:     Service.GuarantyKM,
+            Autouid:        Service.Autouid,
           });
-          console.log(Auto.Alias);          
+          console.log(Service.Description);          
       }); 
     } 
   }
@@ -100,105 +96,50 @@ export default class CarDetails extends Component {
 
   Update(){
     const miRegistro ={
-      Alias:    this.state.Alias,
-      Maker:    this.state.Maker,
-      Model:    this.state.Model,
-      Year:     this.state.Year,
-      Color:    this.state.Color,
-      Mileage:  this.state.Mileage,
-      useruid:  this.state.user.uid,
-      ImageURL: this.state.ImageURL,
-    }
-
-    FirebaseRef.database().ref('/Autos/' + this.props.navigation.state.params.AutoID).set(miRegistro)
+        Mileage:          this.state.Mileage,
+        Description:      this.state.Description,
+        ServiceDate:      this.state.ServiceDate,
+        TotalAmount:      this.state.TotalAmount,
+        GuarantyDays:     this.state.GuarantyDays,
+        GuarantyKM:       this.state.GuarantyKM,
+      }
+  
+    FirebaseRef.database().ref('/RepairEvent/' + this.props.navigation.state.params.AutoID).set(miRegistro)
     .then(()=>{
       console.log(miRegistro);
-      this.props.navigation.navigate('CarListing');
+      this.props.navigation.navigate('CarDetails');
   
     });
   }
 
 
   Delete(){
-   FirebaseRef.database().ref('/Autos/' + this.props.navigation.state.params.AutoID).remove();
+   FirebaseRef.database().ref('/RepairEvent/' + this.props.navigation.state.params.AutoID).remove();
   }
 
   Add(){
-    var newPostKey = FirebaseRef.database().ref().child('Autos').push().key;
+    var newPostKey = FirebaseRef.database().ref().child('RepairEvent').push().key;
     const miRegistro ={
-      Alias:    this.state.Alias,
-      Maker:    this.state.Maker,
-      Model:    this.state.Model,
-      Year:     this.state.Year,
-      Color:    this.state.Color,
-      Mileage:  this.state.Mileage,
-      useruid:  this.state.user.uid,
-      ImageURL: this.state.ImageURL,
+      Mileage:          this.state.Mileage,
+      Description:      this.state.Description,
+      ServiceDate:      this.state.ServiceDate,
+      TotalAmount:      this.state.TotalAmount,
+      GuarantyDays:     this.state.GuarantyDays,
+      GuarantyKM:       this.state.GuarantyKM,
+      Autouid:          this.props.navigation.state.params.AutoID,
     }
 
     var updates = {};
     
-    updates['/Autos/' + newPostKey] = miRegistro;
+    updates['/RepairEvent/' + newPostKey] = miRegistro;
     console.log(miRegistro);
 
     return FirebaseRef.database().ref().update(updates)
     .then(()=>{
-      this.props.navigation.navigate('CarListing');
+      this.props.navigation.navigate('CarDetails');
     });
       
   }
-
-
-
-  subeImagen(){
-    if (this.state.imagePath){
-      UploadImage(this.state.imagePath, 'autos', `miprimerFoto.jpg`)
-      .then ((responseData)=>{
-        console.log('imagen Arriba', responseData)
-      })
-      .done()
-    }
-  }
-
-
-  shootImage() {
-    const options = {
-      title:'Seleccciona Imagen',
-      storageOptions:{
-        skipBackup:true,
-        path:'images',
-      }
-    };
-    ImagePicker.launchCamera(options,(response)=> {
-      if (response.didCancel){
-        console.log('Usuario cancelo la selección de Imagen');
-      } else if (response.error) {
-        console.log('Error ' + response.error);
-      } else if (response.customButton){
-        console.log('Usuario cancelo con el boton');
-      } else {
-        this.setState({
-          imageURL:response.uri,
-          imagePath:response.uri,
-          imageHeight: response.height,
-          imageWidth: response.width,
-        })
-
-        if (this.state.imagePath){
-          UploadImage(this.state.imagePath, 'autos', this.props.navigation.state.params.AutoID +`.jpg`)
-          .then ((responseData)=>{
-            console.log('imagen Arriba', responseData)
-            this.setState({
-                ImageURL: responseData.downloadURL,
-            })
-          })
-          .done()
-        }
-        console.log('H:' + this.state.imageHeight + '  W: ' + this.state.imageWidth + ' URI:' + this.state.imageURL);
-      }
-    })
-  }
-
 
 
   render(){
@@ -211,62 +152,40 @@ export default class CarDetails extends Component {
               directionalLockEnabled={false}
               horizontal={false} >
       <View style={[styles.container,{flexDirection:'column',borderWidth:2}]}>
-      <View style={[styles.container,{flexDirection:'column'}]}>
-          <View style={[styles.container,{justifyContent:'center', alignItems:'center', }]}>
-                  {this.state.ImageURL ? 
-                        <CachedImage source={{uri:this.state.ImageURL}} resizeMode='cover' style={{ resizeMode:'cover', width:200, height:200}} mutable/> 
-                        :
-                        <Icon style={{marginLeft:4, padding:10, fontSize:120}} 
-                                name="ios-car" 
-                                size={120} 
-                                color='black' />
-                  }
-          </View>
-          <View style={{height:40}}>
-            <TouchableHighlight onPress={this.shootImage.bind(this)}>
-              <View style={{flexDirection:'row', alignItems:'center', alignSelf:'flex-end'}}>
-                  <Text>Toma Foto</Text>
-                  <Icon style={{marginLeft:4, padding:10, fontSize:20}} 
-                        name="md-camera" 
-                        size={20} 
-                        color='black' />
-              </View>
-            </TouchableHighlight>
-          </View>
-      </View>
-      <View style={styles.inputContainer}>
+       <View style={styles.inputContainer}>
+           <Text>Auto ID{this.props.navigation.state.params.AutoID}</Text>
         <TextInput
         style={styles.input}
-        placeholder={'Alias del Auto'}
-        onChangeText={(Alias) => this.setState({Alias})}
-        value={this.state.Alias}
+        placeholder={'Descripción'}
+        onChangeText={(Description) => this.setState({Description})}
+        value={this.state.Description}
         />
         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
             <TextInput
               style={[styles.input, {width:150}]}
-              placeholder={'Fabricante'}
-              onChangeText={(Maker) => this.setState({Maker})}
-              value={this.state.Maker}
+              placeholder={'Fecha del Servicio'}
+              onChangeText={(ServiceDate) => this.setState({ServiceDate})}
+              value={this.state.ServiceDate}
             />
             <TextInput
             style={[styles.input, {width:150}]}
-            placeholder={'Modelo'}
-              onChangeText={(Model) => this.setState({Model})}
-              value={this.state.Model}
+            placeholder={'Precio del servicio'}
+              onChangeText={(TotalAmount) => this.setState({TotalAmount})}
+              value={this.state.TotalAmount}
               />
           </View>
           <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <TextInput
               style={[styles.input, {width:150}]}
-              placeholder={'Año'}
-              onChangeText={(Year) => this.setState({Year})}
-              value={this.state.Year}
+              placeholder={'Garantia Dias'}
+              onChangeText={(GuarantyDays) => this.setState({GuarantyDays})}
+              value={this.state.GuarantyDays}
               />
               <TextInput
               style={[styles.input, {width:150}]}
-              placeholder={'Color'}
-              onChangeText={(Color) => this.setState({Color})}
-              value={this.state.Color}
+              placeholder={'Garantia KM'}
+              onChangeText={(GuarantyKM) => this.setState({GuarantyKM})}
+              value={this.state.GuarantyKM}
               />
           </View>
           <TextInput
@@ -331,7 +250,7 @@ export default class CarDetails extends Component {
                     </View>
                 </TouchableHighlight> 
               )}
-              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarListing')} >
+              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarDetails')} >
                 <View style={{alignItems:'center'}}>
                   <Text>Cancelar</Text>
                   <Icon style={{fontSize:40}} 
@@ -343,16 +262,6 @@ export default class CarDetails extends Component {
           </View>
           </View>
           </View>
-          <RepairEventListing AutoID={this.props.navigation.state.params.AutoID}>
-
-          </RepairEventListing>
-          <TouchableHighlight onPress={()=> this.props.navigation.navigate('RepairEvent',{AutoID:this.props.navigation.state.params.AutoID, RepairEvent:'new_RepairEvent'})}>
-                    <Icon style={{marginLeft:4, padding:10, fontSize:20}} 
-                          name="ios-add-circle-outline" 
-                          size={20} 
-                          color='black' />
-              </TouchableHighlight>
-
         </ScrollView>
       </ImageBackground>
     );
@@ -360,6 +269,6 @@ export default class CarDetails extends Component {
 }
 
 
-CarDetails.navigationOptions = {
-  title: "Detalles del Auto", 
+RepairEvent.navigationOptions = {
+  title: "Detalles del Servicio", 
 };
