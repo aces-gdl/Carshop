@@ -24,6 +24,7 @@ import renderIf       from './../../src/utils/RenderIf';
 import ImagePicker    from 'react-native-image-picker';
 import RNFetchBlob    from 'react-native-fetch-blob';
 import UploadImage    from './../../src/utils/UploadImage';
+import DatePicker     from 'react-native-datepicker';
 
 const  styles = require ('./../../css/global');
 const storageRef = FirebaseRef.storage();
@@ -107,7 +108,7 @@ export default class RepairEvent extends Component {
     FirebaseRef.database().ref('/RepairEvent/' + this.props.navigation.state.params.AutoID).set(miRegistro)
     .then(()=>{
       console.log(miRegistro);
-      this.props.navigation.navigate('CarDetails');
+      this.props.navigation.navigate('CarDetails',{AutoID:this.props.navigation.state.params.AutoID});
   
     });
   }
@@ -136,7 +137,7 @@ export default class RepairEvent extends Component {
 
     return FirebaseRef.database().ref().update(updates)
     .then(()=>{
-      this.props.navigation.navigate('CarDetails');
+      this.props.navigation.navigate('CarDetails',{AutoID:this.props.navigation.state.params.AutoID});
     });
       
   }
@@ -161,18 +162,35 @@ export default class RepairEvent extends Component {
         value={this.state.Description}
         />
         <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-            <TextInput
-              style={[styles.input, {width:150}]}
-              placeholder={'Fecha del Servicio'}
-              onChangeText={(ServiceDate) => this.setState({ServiceDate})}
-              value={this.state.ServiceDate}
+            <DatePicker
+                style={{width: 150}}
+                date={this.state.ServiceDate}
+                mode="date"
+                placeholder="Fecha de servicio"
+                format="YYYY-MM-DD"
+                minDate="2017-08-31"
+                confirmBtnText="OK"
+                cancelBtnText="Cancelar"
+                customStyles={{
+                  dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                  },
+                  dateInput: {
+                    marginLeft: 36
+                  }
+                  // ... You can check the source to find the other keys. 
+                }}
+                onDateChange={(date) => {this.setState({ServiceDate: date})}}
             />
             <TextInput
-            style={[styles.input, {width:150}]}
-            placeholder={'Precio del servicio'}
+              style={[styles.input, {width:150}]}
+              placeholder={'Costo del Servicio'}
               onChangeText={(TotalAmount) => this.setState({TotalAmount})}
               value={this.state.TotalAmount}
-              />
+            />
           </View>
           <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <TextInput
@@ -194,28 +212,7 @@ export default class RepairEvent extends Component {
             onChangeText={(Mileage) => this.setState({Mileage})}
             value={this.state.Mileage}
           />
-          {renderIf(this.state.isUpdate,
-          <View style={[styles.buttonContainer, {flexDirection:'row', justifyContent:'space-between',}]}>
-            <TouchableHighlight style={styles.button} onPress={()=> Alert.alert('Servicios')} >
-              <View style={{alignItems:'center'}}>
-                <Text>Servicios</Text>
-                <Icon style={{fontSize:40}} 
-                        name="ios-folder-open-outline" 
-                        size={40} 
-                        color='black' />
-              </View>
-            </TouchableHighlight> 
-            <TouchableHighlight style={styles.button} onPress={() => Alert.alert('Notificaciones')} >
-              <View style={{alignItems:'center'}}>
-                <Text>Notificaciones</Text>
-                <Icon style={{fontSize:40}} 
-                        name="ios-pulse-outline" 
-                        size={40} 
-                        color='black' />
-              </View>
-            </TouchableHighlight> 
-          </View>
-          )}
+
           <View style={[styles.buttonContainer, {flexDirection:'row', justifyContent:'space-between',}]}>
               {renderIf(this.state.isUpdate, 
                 <TouchableHighlight style={styles.button} onPress={this.Update.bind(this)} >
@@ -250,7 +247,7 @@ export default class RepairEvent extends Component {
                     </View>
                 </TouchableHighlight> 
               )}
-              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarDetails')} >
+              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarDetails',{AutoID:this.props.navigation.state.params.AutoID})} >
                 <View style={{alignItems:'center'}}>
                   <Text>Cancelar</Text>
                   <Icon style={{fontSize:40}} 

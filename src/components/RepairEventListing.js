@@ -56,7 +56,9 @@ export default class RepairEventListing extends Component {
   renderRow(rowData){
         return(
         <View style={styles.listContainer}>
+          <TouchableHighlight onPress={()=> this.props.navigation.navigate('RepairEvent',{AutoID:this.props.AutoID, RepairEvent:rowData.id})}>
             <Text>{rowData.Repair.Description}</Text>
+          </TouchableHighlight>
         </View>
     )
   }
@@ -68,7 +70,7 @@ export default class RepairEventListing extends Component {
           style={[styles.backgroundImage,{alignContent:'center'}]}
           imageStyle={styles.imageStyle} >
           <View style={{flex:1, justifyContent:'center'}}>
-            <Text>Hola {this.props.AutoID} ....</Text>
+            <Text>Servicios</Text>
             <ListView 
               dataSource={this.state.ds}
               renderRow={this.renderRow}
@@ -78,9 +80,3 @@ export default class RepairEventListing extends Component {
     );
   }
 }
-
-
-RepairEventListing.navigationOptions = {
-    title: "Detalles reparacion", 
-  };
-  

@@ -210,7 +210,7 @@ export default class CarDetails extends Component {
       <ScrollView style={{flex:1}}
               directionalLockEnabled={false}
               horizontal={false} >
-      <View style={[styles.container,{flexDirection:'column',borderWidth:2}]}>
+      <View style={[styles.container,{flexDirection:'column'}]}>
       <View style={[styles.container,{flexDirection:'column'}]}>
           <View style={[styles.container,{justifyContent:'center', alignItems:'center', }]}>
                   {this.state.ImageURL ? 
@@ -275,7 +275,7 @@ export default class CarDetails extends Component {
             onChangeText={(Mileage) => this.setState({Mileage})}
             value={this.state.Mileage}
           />
-          {renderIf(this.state.isUpdate,
+          {renderIf(false,
           <View style={[styles.buttonContainer, {flexDirection:'row', justifyContent:'space-between',}]}>
             <TouchableHighlight style={styles.button} onPress={()=> Alert.alert('Servicios')} >
               <View style={{alignItems:'center'}}>
