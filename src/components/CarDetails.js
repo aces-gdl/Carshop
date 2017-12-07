@@ -54,6 +54,8 @@ export default class CarDetails extends Component {
       isUpdate:false,
       user:user,
     }
+
+    this.loadRepairEvent = this.loadRepairEvent.bind(this);
   }
 
  /* Leave it as reference */  
@@ -199,7 +201,11 @@ export default class CarDetails extends Component {
     })
   }
 
-
+  loadRepairEvent(info1){
+    if (info1){
+      this.props.navigation.navigate('RepairEvent',{AutoID:this.props.navigation.state.params.AutoID, RepairEvent:info1.RepairEvent}); 
+    }
+  }
 
   render(){
     return(
@@ -343,9 +349,9 @@ export default class CarDetails extends Component {
           </View>
           </View>
           </View>
-          <RepairEventListing AutoID={this.props.navigation.state.params.AutoID}>
+          
+          <RepairEventListing AutoID={this.props.navigation.state.params.AutoID}  onPress={this.loadRepairEvent} />
 
-          </RepairEventListing>
           <TouchableHighlight onPress={()=> this.props.navigation.navigate('RepairEvent',{AutoID:this.props.navigation.state.params.AutoID, RepairEvent:'new_RepairEvent'})}>
                     <Icon style={{marginLeft:4, padding:10, fontSize:20}} 
                           name="ios-add-circle-outline" 

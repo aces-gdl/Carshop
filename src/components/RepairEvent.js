@@ -76,12 +76,12 @@ export default class RepairEvent extends Component {
     if (this.props.navigation.state.params.RepairEvent != 'new_RepairEvent'){
       let RepairEventID = this.props.navigation.state.params.RepairEvent;
       let AutoID = this.props.navigation.state.params.AutoID;
-      return FirebaseRef.database().ref('/RepairEvents/' + RepairEventID).once('value')
+      return FirebaseRef.database().ref('/RepairEvent/' + RepairEventID).once('value')
       .then((snapshot) =>{
           Service = snapshot.val();
           this.setState({
-            Mileage:        Servicio.Mileage,
-            Description:    Servicio.Description,
+            Mileage:        Service.Mileage,
+            Description:    Service.Description,
             ServiceDate:    Service.ServiceDate,
             TotalAmount:    Service.TotalAmount,
             GuarantyDays:   Service.GuarantyDays,
@@ -154,7 +154,6 @@ export default class RepairEvent extends Component {
               horizontal={false} >
       <View style={[styles.container,{flexDirection:'column',borderWidth:2}]}>
        <View style={styles.inputContainer}>
-           <Text>Auto ID{this.props.navigation.state.params.AutoID}</Text>
         <TextInput
         style={styles.input}
         placeholder={'Descripción'}
@@ -187,6 +186,7 @@ export default class RepairEvent extends Component {
             />
             <TextInput
               style={[styles.input, {width:150}]}
+              keyboardType={'numeric'}
               placeholder={'Costo del Servicio'}
               onChangeText={(TotalAmount) => this.setState({TotalAmount})}
               value={this.state.TotalAmount}
@@ -195,6 +195,7 @@ export default class RepairEvent extends Component {
           <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <TextInput
               style={[styles.input, {width:150}]}
+              keyboardType={'numeric'}
               placeholder={'Garantia Dias'}
               onChangeText={(GuarantyDays) => this.setState({GuarantyDays})}
               value={this.state.GuarantyDays}
@@ -202,12 +203,14 @@ export default class RepairEvent extends Component {
               <TextInput
               style={[styles.input, {width:150}]}
               placeholder={'Garantia KM'}
+              keyboardType={'numeric'}
               onChangeText={(GuarantyKM) => this.setState({GuarantyKM})}
               value={this.state.GuarantyKM}
               />
           </View>
           <TextInput
             style={styles.input}
+            keyboardType={'numeric'}
             placeholder={'Kilometraje'}
             onChangeText={(Mileage) => this.setState({Mileage})}
             value={this.state.Mileage}
@@ -247,7 +250,7 @@ export default class RepairEvent extends Component {
                     </View>
                 </TouchableHighlight> 
               )}
-              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarDetails',{AutoID:this.props.navigation.state.params.AutoID})} >
+              <TouchableHighlight style={styles.button}  onPress={() => this.props.navigation.navigate('CarDetails',{AutoID:this.props.navigation.state.params.AutoID})}  >
                 <View style={{alignItems:'center'}}>
                   <Text>Cancelar</Text>
                   <Icon style={{fontSize:40}} 

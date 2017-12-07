@@ -54,9 +54,10 @@ export default class RepairEventListing extends Component {
 
 
   renderRow(rowData){
+      let params1 = {AutoID:this.props.AutoID, RepairEvent:rowData.id};
         return(
         <View style={styles.listContainer}>
-          <TouchableHighlight onPress={()=> this.props.navigation.navigate('RepairEvent',{AutoID:this.props.AutoID, RepairEvent:rowData.id})}>
+          <TouchableHighlight onPress={()=> this.props.onPress(params1)}>
             <Text>{rowData.Repair.Description}</Text>
           </TouchableHighlight>
         </View>
