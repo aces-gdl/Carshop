@@ -9,6 +9,7 @@ import {
   ListView,
   ImageBackground,
   Alert,
+  Image,
 } from 'react-native';
 
 import {CachedImage}  from 'react-native-img-cache';
@@ -52,9 +53,12 @@ export default class CarListing extends Component {
 
   }
 
+                        //entonceresizeMode='cover' style={{ resizeMode:'cover', width:50, height:50,marginRight:4, padding:10}}/> 
 
   renderRow(rowData){
-    console.log('Image per Row ' +rowData.Auto.ImageURL);
+    // /Users/juan_navarro/development/react-native-projects/carshop2/android/app/src/main/res/drawable/kia.png
+    //var imageURL = rowData.Auto.Maker +'.png' ;   
+    //let logoImage = require("./../../images/logos/toyota.png") ;  
     return(
 
 
@@ -62,8 +66,11 @@ export default class CarListing extends Component {
           <View style={{flexDirection:'column'}}>
             <View style={{flexDirection:'row', justifyContent:'space-between'}}>
               <View style={{flexDirection:'row', alignContent:'flex-start'}}>
-              {rowData.Auto.ImageURL ? 
-                        <CachedImage source={{uri:rowData.Auto.ImageURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50,marginRight:4, padding:10}} mutable/> 
+              {true ? //rowData.Auto.ImageURL ? 
+                        <Image 
+                                source={{uri:rowData.Auto.Maker}}
+                                onError={()=> console.log('Error al cargar')}
+                                style={{ resizeMode:'cover', width:50, height:50,marginRight:4, padding:10}}/>
                         :
                         <Icon style={{marginRight:4, padding:10, fontSize:40}} 
                                 name="ios-car" 
@@ -121,3 +128,5 @@ export default class CarListing extends Component {
 CarListing.navigationOptions = {
     title: "Autos", 
 };
+
+

@@ -54,3 +54,6 @@ fastlane/screenshots
 .vscode/.react/index.android.bundle
 .vscode/.react/index.android.map
 
+.vscode/.react/index.android.bundle
+.vscode/.react/index.android.map
+.gitignore
