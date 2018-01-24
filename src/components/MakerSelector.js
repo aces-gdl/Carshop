@@ -104,13 +104,13 @@ class MakerSelector extends Component {
     
     renderRow(rowData){
         return(
-        <View  style={{flex:1, paddingBottom:2, margin:2, }}>
+        <View  style={[styles.listContainer,{justifyContent:'center', alignContent:'center', }]}>
             <TouchableHighlight style={{flex:1,}} onPress = {()=> this.props.onPress(rowData.key)}>
                 <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
                     <Image 
                                     source={{uri:rowData.key}}
                                     onError={()=> console.log('Error al cargar')}
-                                    style={{ resizeMode:'cover', width:50, height:50,marginRight:4, padding:10}}/>
+                                    style={{ resizeMode:'cover', width:50, height:50,}}/>
 
                     <Text style={{color:'rgba(52,109,241,1)',
                                     fontSize:30,

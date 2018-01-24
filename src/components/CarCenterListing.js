@@ -82,6 +82,11 @@ AddTaller(){
     )
   }
 
+  componentWillUpdate(){
+    console.log('Entre a componentsWillUpdate');
+  }
+
+
   render(){
     return(
       <ImageBackground 

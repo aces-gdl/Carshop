@@ -25,7 +25,7 @@ import ImagePicker    from 'react-native-image-picker';
 import RNFetchBlob    from 'react-native-fetch-blob';
 import UploadImage    from './../../src/utils/UploadImage';
 import RepairEventListing  from './RepairEventListing';
-
+import MakerSelector  from './MakerSelector';
 
 const  styles = require ('./../../css/global');
 const storageRef = FirebaseRef.storage();
@@ -53,9 +53,11 @@ export default class CarDetails extends Component {
       ImageURL:'',
       isUpdate:false,
       user:user,
+      makerVisible:false,
     }
 
     this.loadRepairEvent = this.loadRepairEvent.bind(this);
+    this.MakerSelected   = this.MakerSelected.bind(this);
   }
 
  /* Leave it as reference */  
@@ -207,6 +209,13 @@ export default class CarDetails extends Component {
     }
   }
 
+  MakerSelected(maker){
+    this.setState({
+        makerVisible:false,
+        Maker:maker,
+    });
+    console.log(maker);
+  }
   render(){
     return(
       <ImageBackground 
@@ -241,46 +250,60 @@ export default class CarDetails extends Component {
           </View>
       </View>
       <View style={styles.inputContainer}>
-        <TextInput
-        style={styles.input}
-        placeholder={'Alias del Auto'}
-        onChangeText={(Alias) => this.setState({Alias})}
-        value={this.state.Alias}
-        />
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center',}}>
+          <Text style={[styles.textFieldLabel]}>Alias</Text>
+          <TextInput
+            style={[styles.input, {width:230}]}
+            placeholder={'Alias del Auto'}
+            onChangeText={(Alias) => this.setState({Alias})}
+            value={this.state.Alias}
+          />
+        </View>
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center', }}>
+            <Text style={[styles.textFieldLabel]}>Fabricante</Text>
+            <TouchableHighlight onPress={()=>{this.setState({makerVisible:true});}}>
+              <Text style={[styles.input, {width:230}]}>{this.state.Maker}</Text>
+            </TouchableHighlight>
+            <MakerSelector onPress={this.MakerSelected} visible={this.state.makerVisible}  title={'Seleccione Marca'} />
+        </View>
+
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center',}}>
+            <Text style={[styles.textFieldLabel]}>Modelo</Text>
             <TextInput
-              style={[styles.input, {width:150}]}
-              placeholder={'Fabricante'}
-              onChangeText={(Maker) => this.setState({Maker})}
-              value={this.state.Maker}
-            />
-            <TextInput
-            style={[styles.input, {width:150}]}
-            placeholder={'Modelo'}
+              style={[styles.input, {width:230}]}
+              placeholder={'Modelo'}
               onChangeText={(Model) => this.setState({Model})}
               value={this.state.Model}
               />
-          </View>
-          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-              <TextInput
-              style={[styles.input, {width:150}]}
-              placeholder={'Año'}
-              onChangeText={(Year) => this.setState({Year})}
-              value={this.state.Year}
-              />
-              <TextInput
-              style={[styles.input, {width:150}]}
-              placeholder={'Color'}
-              onChangeText={(Color) => this.setState({Color})}
-              value={this.state.Color}
-              />
-          </View>
+        </View>
+
+        <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center',}}>
+          <Text style={[styles.textFieldLabel]}>Año</Text>
           <TextInput
-            style={styles.input}
-            placeholder={'Kilometraje'}
-            onChangeText={(Mileage) => this.setState({Mileage})}
-            value={this.state.Mileage}
+            style={[styles.input, {width:230}]}
+            placeholder={'Año'}
+            onChangeText={(Year) => this.setState({Year})}
+            value={this.state.Year}
           />
+      </View>
+      <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center',}}>
+        <Text style={[styles.textFieldLabel]}>Color</Text>
+        <TextInput
+          style={[styles.input, {width:230}]}
+          placeholder={'Color'}
+          onChangeText={(Color) => this.setState({Color})}
+          value={this.state.Color}
+          />
+      </View>
+      <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center',}}>
+        <Text style={[styles.textFieldLabel]}>Kilometraje</Text>
+        <TextInput
+          style={[styles.input, {width:230}]}
+          placeholder={'Kilometraje'}
+          onChangeText={(Mileage) => this.setState({Mileage})}
+          value={this.state.Mileage}
+          />
+      </View>
           {renderIf(false,
           <View style={[styles.buttonContainer, {flexDirection:'row', justifyContent:'space-between',}]}>
             <TouchableHighlight style={styles.button} onPress={()=> Alert.alert('Servicios')} >

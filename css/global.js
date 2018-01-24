@@ -50,8 +50,8 @@ module.exports = StyleSheet.create({
       fontSize: 16,
       height: 40,
       padding: 5,
-      marginBottom: 5,
-      backgroundColor:'rgba(255,255,255,1)'
+      backgroundColor:'rgba(255,255,255,1)',
+      marginBottom:5,
     },
     logo:{
       color:'white',
@@ -97,5 +97,12 @@ module.exports = StyleSheet.create({
       justifyContent:'space-between', 
       padding:1, 
       alignContent:'center'
+    },
+    textFieldLabel:{
+      color:'black',
+      fontSize:16,
+      fontStyle:'normal',
+      fontWeight:'normal',
+      marginBottom:20,
     },
 });

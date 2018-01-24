@@ -36,7 +36,8 @@ export default class Settings extends Component {
   }
 
 
-  componentDidMount(){
+  componentWillUpdate(){
+    console.log('Entre a componentsWillUpdate');
   }
 
 
@@ -49,6 +50,7 @@ export default class Settings extends Component {
     console.log(maker);
   }
   render(){
+    
     return(
       <ImageBackground 
           source={require('./../../images/background1.jpg')}
