@@ -79,7 +79,8 @@ export default class Login extends Component {
   }
 
   FirebaseSignin(){
-    const credential = firebase.auth.GoogleAuthProvider.credential(this.state.user.idToken, this.state.user.accessToken);
+    const credential = firebase.auth.GoogleAuthProvider
+                          .credential(this.state.user.idToken, this.state.user.accessToken);
     FirebaseRef.auth().signInWithCredential(credential)
     .then((data) => {
       try{
@@ -88,7 +89,7 @@ export default class Login extends Component {
           loginInProgress: false,
         });
         this.props.navigation.navigate('MainScreen')
-        }catch(error){
+      }catch(error){
           console.log('Error during navigate : ' + error)
       }
     })
@@ -130,73 +131,3 @@ export default class Login extends Component {
   }
 }
 
-/*
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-
-  },
-  content:{
-    flex:1,
-    alignContent:'center',
-    justifyContent:'center',
-    alignItems:'center',
-  },
-  backgroundImage:{
-    flex:1,
-    width: null,
-    height: null,
-  
-  },
-  imageStyle:{
-    width:750,
-    height:750,
-  },
-  inputContainer:{
-    margin:20,
-    marginBottom:0,
-    padding:20,
-    paddingBottom: 10,
-    borderWidth:1,
-    alignSelf:'stretch',
-    borderColor:'#fff',
-    backgroundColor: 'rgba(255,255,255,0.2)',
-  },
-  input:{
-    fontSize: 16,
-    height: 40,
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor:'rgba(255,255,255,1)'
-  },
-  logo:{
-    color:'white',
-    fontSize:40,
-    fontStyle:'italic',
-    fontWeight:'bold',
-    textShadowColor:'#252525',
-    textShadowOffset:{width:5, height: 5},
-    textShadowRadius: 15,
-    marginBottom:20,
-    backgroundColor: 'rgba(255,255,255,0.1)'
-  },
-  buttonContainer:{
-    alignSelf:'stretch',
-    margin: 20,
-    padding: 20,
-    backgroundColor:'blue',
-    borderWidth:1,
-    borderColor:'#fff',
-    backgroundColor:'rgba(255,255,255,0.6)'
-  },
-  buttonText:{
-    fontSize:16,
-    fontWeight:'bold',
-    textAlign:'center',
-  },
-  
-});
-
-
-*/

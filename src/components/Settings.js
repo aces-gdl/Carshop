@@ -15,7 +15,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import ApiUtils from './../utils/ApiUtils';
-import MakerSelector from './MakerSelector';
+import ServiceType from './ServiceType';
 
 const  styles = require ('./../../css/global');
 
@@ -57,13 +57,13 @@ export default class Settings extends Component {
           style={styles.backgroundImage}
           imageStyle={styles.imageStyle} >
 
-          <Text>Seleccione una marca</Text>
+          <Text>Seleccione un tipo de servicio</Text>
           <TouchableHighlight onPress={()=>{this.setState({menuVisible:true});}}>
               <View style={{flexDirection:'column', alignItems:'center', alignSelf:'flex-end'}}>
                   <Text>{this.state.Marca}</Text>
               </View>
             </TouchableHighlight>
-            <MakerSelector onPress={this.MakerSelected} visible={this.state.menuVisible}  title={'Seleccione Marca'} />
+            <ServiceType onPress={this.MakerSelected} visible={this.state.menuVisible}  title={'Seleccione Marca'} />
       </ImageBackground>
     );
   }

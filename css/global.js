@@ -66,16 +66,17 @@ module.exports = StyleSheet.create({
     },
     buttonContainer:{
       alignSelf:'stretch',
-      margin: 20,
-      padding: 20,
+      margin: 10,
+      padding: 10,
       borderWidth:1,
       borderColor:'#fff',
-      backgroundColor:'rgba(255,255,255,0.6)'
+      borderRadius:25,
+      backgroundColor:'rgba(255,255,255,0.6)',
     },
     button:{
       alignSelf:'stretch',
-      margin: 5,
-      padding: 5,
+      margin: 2,
+      padding: 2,
       borderWidth:1,
       borderColor:'#fff',
       backgroundColor:'rgba(255,255,255,0.6)'

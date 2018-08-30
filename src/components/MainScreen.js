@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TextInput,
-  TouchableHighlight,
+  TouchableOpacity,
   ImageBackground,
   Alert,
 } from 'react-native';
@@ -71,41 +71,41 @@ export default class MainScreen extends Component {
           <View style={{flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <Text>Bienvenido: {this.state.displayName}</Text>
             {renderIf(this.state.photoURL,
-            <CachedImage source={{uri:this.state.photoURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50, borderRadius:25}} mutable/> 
+              <CachedImage source={{uri:this.state.photoURL}} resizeMode='cover' style={{ resizeMode:'cover', width:50, height:50, borderRadius:25}} mutable/> 
             )}
           </View>
-          <TouchableHighlight 
+          <TouchableOpacity 
                 onPress={() => this.props.navigation.navigate('CarCenterListing')} 
                 style={styles.buttonContainer}>
             <View style={styles.buttonContent}>
               <Text  style={styles.buttonText}>Talleres</Text>
               <Icon style={styles.icon} name="ios-build-outline" color='black' />
             </View>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
               style={styles.buttonContainer} 
               onPress={() => this.props.navigation.navigate('CarListing')} >
               <View style={styles.buttonContent}>
                 <Text style={styles.buttonText}>Autos</Text>
                 <Icon style={styles.icon} name="ios-car-outline"  color='black' />
               </View>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
               style={styles.buttonContainer} 
               onPress={() => this.props.navigation.navigate('Settings')} >
               <View style={styles.buttonContent}>
                 <Text style={styles.buttonText}>Perfil</Text>
                 <Icon style={styles.icon} name="ios-man-outline" color='black' />
               </View>
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
             style={styles.buttonContainer} 
             onPress={() => this.GoogleSignOut()} >
             <View style={styles.buttonContent}>
               <Text style={styles.buttonText}>Ajustes</Text>
               <Icon style={styles.icon} name="ios-settings-outline" color='black' />
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
       </View>
       </ImageBackground>
     );
